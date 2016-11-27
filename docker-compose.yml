@@ -4,6 +4,11 @@ services:
   app:
     restart: always
     build: ./app
+    environment:
+      - DB_HOST=redis
+      - DB_PORT=6379
+    depends_on:
+      - redis
     expose:
       - "8000"
     volumes:
