@@ -90,3 +90,6 @@ ENV/
 
 # Redis db dump
 *.rdb
+
+# Ignore idea's data
+*.idea
