@@ -1,5 +1,6 @@
 version: '2'
 services:
+
   app:
     restart: always
     build: ./app
@@ -8,9 +9,13 @@ services:
     volumes:
       - ./app:/usr/src/app/
     command: /usr/local/bin/gunicorn --reload --log-level info -w 1 -b :8000 app:app
+
   redis:
     image: redis
+    user: redis
     restart: always
+    volumes:
+      - ./redis-data:/data:rw
     ports:
       - "6379:6379"
 
