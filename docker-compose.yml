@@ -1,0 +1,27 @@
+version: '2'
+services:
+  app:
+    restart: always
+    build: ./app
+    expose:
+      - "8000"
+    volumes:
+      - ./app:/usr/src/app/
+    command: /usr/local/bin/gunicorn --reload --log-level info -w 1 -b :8000 app:app
+  redis:
+    image: redis
+    restart: always
+    ports:
+      - "6379:6379"
+
+  nginx:
+    restart: always
+    build: ./nginx/
+    ports:
+      - "80:80"
+    volumes:
+      - /www/static
+    volumes_from:
+      - app
+    links:
+      - app:app
