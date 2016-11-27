@@ -12,7 +12,10 @@ services:
 
   redis:
     image: redis
+    user: redis
     restart: always
+    volumes:
+      - ./redis-data:/data:rw
     ports:
       - "6379:6379"
 
